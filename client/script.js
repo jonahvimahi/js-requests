@@ -1,6 +1,8 @@
 ////////////////////////////////////////////////
 //THE TEST SERVER IS RUNNING ON LOCALHOST:3000//
 
+
+
 ////////////////////////////////////////////////
 console.log('test')
 // PROBLEM 1
@@ -94,7 +96,11 @@ anotherClick()
 
 const ohMy = () => {
     axios.get(`http://localhost:3000/animals`).then((res) =>{
-         console.log(res.data)
+         for (let i = 0; i < res.data.length; i++){
+             let newP = document.createElement('p')
+             newP.textContent = res.data[i]
+             document.querySelector('body').appendChild(newP)
+         }
      });
 }
 
@@ -146,7 +152,7 @@ repeatButton.addEventListener('click', repeatMyParam)
 // CODE HERE
 
 const queryTest = () => {
-    axios.get(`http://localhost:3000/query-test/?name=jonah`).then((res) =>{
+    axios.get(`http://localhost:3000/query-test/?name=jonah&age=21`).then((res) =>{
         console.log(res.data)
     })
 }
@@ -204,3 +210,29 @@ queryButton.addEventListener('click', queryTest)
 */
 
 // CODE HERE 
+
+const createFood = (event) => {
+    event.preventDefault()
+    let foodInput = document.querySelector(`input`)
+
+    let body = {
+        newFood: foodInput.value
+    }
+    
+    axios.post(`http://localhost:3000/food`, body)
+    .then(res => {
+        // let food = document.createElement('ul')
+            // for (let i = 0; i < res.data.length ; i++) {
+            newUL = document.createElement('ul')
+            newP = document.createElement(`p`);
+            newP.textContent = res.data.at(-1);
+            document.querySelector(`body`).appendChild(newP)
+            //newUL.appendChild(newP)
+        // }
+    })
+    //console.log(foodInput.innerHTML)
+    foodInput.value = ``
+}
+
+
+document.querySelector(`#addFood`).addEventListener(`click`, createFood)
