@@ -221,18 +221,13 @@ const createFood = (event) => {
     
     axios.post(`http://localhost:3000/food`, body)
     .then(res => {
-        // let food = document.createElement('ul')
-            // for (let i = 0; i < res.data.length ; i++) {
-            newUL = document.createElement('ul')
+            newBody = document.querySelector('body')
             newP = document.createElement(`p`);
             newP.textContent = res.data.at(-1);
             document.querySelector(`body`).appendChild(newP)
-            //newUL.appendChild(newP)
-        // }
     })
-    //console.log(foodInput.innerHTML)
+    
     foodInput.value = ``
 }
-
 
 document.querySelector(`#addFood`).addEventListener(`click`, createFood)
